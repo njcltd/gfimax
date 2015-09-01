@@ -21,7 +21,7 @@ Set oCmd = CreateObject("Wscript.Shell")
 commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & "/quiet"
 WScript.Echo "Installing: " & strExecute
 oCmd.Run commandLine, 0, True
- 
+
 
 '------------------------------------------------------------------------------
 ' subroutine to call for downloading file
