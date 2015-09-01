@@ -20,7 +20,22 @@ Set oCmd = CreateObject("Wscript.Shell")
 '------------------------------------------------------------------------------
 commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & " /quiet"
 WScript.Echo "Installing: " & strExecute
-oCmd.Run commandLine, 0, True
+ = oCmd.Run commandLine, 0, True
+
+'------------------------------------------------------------------------------
+' Return install status
+'------------------------------------------------------------------------------
+If x = 0 OR Then
+WScript.Echo "Sucessfully Installed : " & strExecute
+WScript.quit(0)
+Else if x = 3010 then
+WScript.Echo "Sucessfully Installed : " & strExecute
+WScript.Echo "Reboot Required to complete the install"
+WScript.quit(0)
+Else
+WScript.Echo " installation error : " & x & " - Installing: " & strExecute
+WScript.quit(1001)
+End if
 
 
 '------------------------------------------------------------------------------
