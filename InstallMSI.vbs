@@ -18,7 +18,7 @@ Set oCmd = CreateObject("Wscript.Shell")
 '------------------------------------------------------------------------------
 ' Execute command
 '------------------------------------------------------------------------------
-commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & "/quiet"
+commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & " /quiet"
 WScript.Echo "Installing: " & strExecute
 oCmd.Run commandLine, 0, True
 
