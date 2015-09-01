@@ -10,6 +10,7 @@ strExecute = "customer.ScreenConnect.ClientSetup.msi"
 '------------------------------------------------------------------------------
 ' Download File
 '------------------------------------------------------------------------------
+DownloadPath strSaveTo
 WScript.Echo "Downloading to: " & strSaveTo
 HTTPDownload strURL, strFile
 Set oCmd = CreateObject("Wscript.Shell")
@@ -36,6 +37,32 @@ Else
 WScript.Echo " installation error : " & x & " - Installing: " & strExecute
 WScript.quit(1001)
 End if
+
+
+
+'------------------------------------------------------------------------------
+' subroutine check for download folder and create if required
+'------------------------------------------------------------------------------
+
+Sub DownloadPath(DirPath)
+Dim FSO, aDirectories, sCreateDirectory, iDirectory
+
+Set FSO = CreateObject("Scripting.FileSystemObject")
+If FSO.FolderExists(DirPath) Then
+WScript.Echo "Download folder exists"
+Exit Function
+End If
+
+aDirectories = Split(DirPath, "\")
+sCreateDirectory = aDirectories(0)
+For iDirectory = 1 To UBound(aDirectories)
+sCreateDirectory = sCreateDirectory & "\" & aDirectories(iDirectory)
+If Not FSO.FolderExists(sCreateDirectory) Then
+FSO.CreateFolder(sCreateDirectory)
+End If
+Next
+WScript.Echo "Download folder created"
+End Sub
 
 
 '------------------------------------------------------------------------------
