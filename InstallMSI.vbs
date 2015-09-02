@@ -35,11 +35,11 @@ HTTPDownload strURL, strFile
 '------------------------------------------------------------------------------
 commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & " /quiet"
 WScript.Echo "Installing: " & strExecute
- = oCmd.Run commandLine, 0, True
+x = oCmd.Run commandLine, 0, True
 
 
 '------------------------------------------------------------------------------
-' Release objects used
+' Release objects
 '------------------------------------------------------------------------------
 Set FSO  = Nothing
 Set oCmd = Nothing
