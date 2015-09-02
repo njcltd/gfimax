@@ -58,10 +58,11 @@ WScript.Echo "Sucessfully Installed : " & strExecute
 WScript.Echo "Reboot Required to complete the install"
 WScript.quit(0)
 Else if x = 1604
-WScript.Echo "Already Installed : " & strExecute
+WScript.Echo "Already installed : " & strExecute
 WScript.quit(0)
 Else
-WScript.Echo " installation error : " & x & " - Installing: " & strExecute
+WScript.Echo " installation error : "
+WScript.Echo "Installer Name : " & strExecute
 WScript.quit(1001)
 End if
 
