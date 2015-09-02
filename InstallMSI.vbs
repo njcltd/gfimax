@@ -5,7 +5,22 @@
 strSaveTo = "C:\NJCInst\Download"
 strURL = "http://www.domain.com/downloads/File.msi"
 strExecute = "customer.ScreenConnect.ClientSetup.msi"
+strLocalFile = strSaveTo & "\" & strExecute
 
+
+'------------------------------------------------------------------------------
+' Setup any objects used
+'------------------------------------------------------------------------------
+Set FSO  = CreateObject("Scripting.FileSystemObject")
+Set oCmd = CreateObject("Wscript.Shell")
+
+'------------------------------------------------------------------------------
+' Check if file exists and delete
+'------------------------------------------------------------------------------
+If objFSO.Fileexists(strLocalFile) Then
+ WScript.Echo "Deleted file already downloaded: " & strLocalFile
+ objFSO.DeleteFile strLocalFile
+End If
 
 '------------------------------------------------------------------------------
 ' Download File
@@ -13,7 +28,6 @@ strExecute = "customer.ScreenConnect.ClientSetup.msi"
 DownloadPath strSaveTo
 WScript.Echo "Downloading to: " & strSaveTo
 HTTPDownload strURL, strFile
-Set oCmd = CreateObject("Wscript.Shell")
 
 
 '------------------------------------------------------------------------------
@@ -22,6 +36,16 @@ Set oCmd = CreateObject("Wscript.Shell")
 commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & " /quiet"
 WScript.Echo "Installing: " & strExecute
  = oCmd.Run commandLine, 0, True
+
+
+'------------------------------------------------------------------------------
+' Release objects used
+'------------------------------------------------------------------------------
+Set FSO  = Nothing
+Set oCmd = Nothing
+Set objXMLHTTP = Nothing
+Set objADOStream = Nothing
+
 
 '------------------------------------------------------------------------------
 ' Return install status
@@ -48,9 +72,9 @@ End if
 '------------------------------------------------------------------------------
 
 Sub DownloadPath(DirPath)
-Dim FSO, aDirectories, sCreateDirectory, iDirectory
+Dim aDirectories, sCreateDirectory, iDirectory
 
-Set FSO = CreateObject("Scripting.FileSystemObject")
+
 If FSO.FolderExists(DirPath) Then
 WScript.Echo "Download folder exists"
 Exit Function
