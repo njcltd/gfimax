@@ -33,6 +33,9 @@ Else if x = 3010 then
 WScript.Echo "Sucessfully Installed : " & strExecute
 WScript.Echo "Reboot Required to complete the install"
 WScript.quit(0)
+Else if x = 1604
+WScript.Echo "Already Installed : " & strExecute
+WScript.quit(0)
 Else
 WScript.Echo " installation error : " & x & " - Installing: " & strExecute
 WScript.quit(1001)
