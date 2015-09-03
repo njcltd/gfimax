@@ -27,7 +27,7 @@ End If
 '------------------------------------------------------------------------------
 DownloadPath strSaveTo
 WScript.Echo "Downloading to: " & strSaveTo
-HTTPDownload strURL, strFile
+HTTPDownload strURL, strLocalFile
 
 
 '------------------------------------------------------------------------------
@@ -43,8 +43,6 @@ x = oCmd.Run commandLine, 0, True
 '------------------------------------------------------------------------------
 Set FSO  = Nothing
 Set oCmd = Nothing
-Set objXMLHTTP = Nothing
-Set objADOStream = Nothing
 
 
 '------------------------------------------------------------------------------
@@ -78,8 +76,7 @@ Dim aDirectories, sCreateDirectory, iDirectory
 
 If FSO.FolderExists(DirPath) Then
 WScript.Echo "Download folder exists"
-Exit Function
-End If
+Else
 
 aDirectories = Split(DirPath, "\")
 sCreateDirectory = aDirectories(0)
@@ -90,6 +87,7 @@ FSO.CreateFolder(sCreateDirectory)
 End If
 Next
 WScript.Echo "Download folder created"
+End If
 End Sub
 
 
