@@ -8,7 +8,7 @@
 
 
 Set oFileSys = WScript.CreateObject("Scripting.FileSystemObject")
-sRoot = "%ProgramData%/AdvancedMonitoringAgentNetworkManagement"
+sRoot = "C:\ProgramData\AdvancedMonitoringAgentNetworkManagement"
 today = Date
 nMaxFileAge = 3	 'Files older than this (in days) will be deleted
 
@@ -26,9 +26,10 @@ Function DeleteFiles(ByVal sFolder)
 	Set aFiles = oFolder.Files
 
 	For Each file in aFiles
-		dFileCreated = FormatDateTime(file.DateCreated, "2")
+		dFileCreated = FormatDateTime(file.DateLastModified, "2")
 		If DateDiff("d", dFileCreated, today) > nMaxFileAge Then
-                        WScript.echo "Deleted: "& file.Name & " : " & ConverSize(file.size)
+		                nSize = ConvertSize( file.size)
+                        WScript.echo "Deleted: "& file.Name & " : " & nSize
 			file.Delete(True)
                         
 		End If
