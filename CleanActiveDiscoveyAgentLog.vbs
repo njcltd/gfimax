@@ -12,9 +12,18 @@ sRoot = "C:\ProgramData\AdvancedMonitoringAgentNetworkManagement"
 today = Date
 nMaxFileAge = 3	 'Files older than this (in days) will be deleted
 
+nCount = 0 'Count how many files were removed
+nTotalSize = 0 'Keep track of total file size recovered
+
 WScript.echo "Cleaning up Active Discovey log files over " & nMaxFileAge & " days old"
 
 DeleteFiles(sRoot)
+
+WScript.echo " "
+WScript.echo "==== RESULTS ===="
+WScript.echo " "
+WScript.echo "Total Files Removed: " & nCount
+WScript.echo "Total Space Recovered: " & ConvertSize(nTotalSize)
 
 
 '------------------------------------------------------------------------------
@@ -30,6 +39,8 @@ Function DeleteFiles(ByVal sFolder)
 		If DateDiff("d", dFileCreated, today) > nMaxFileAge Then
 		                nSize = ConvertSize( file.size)
                         WScript.echo "Deleted: "& file.Name & " : " & nSize
+                        nTotalSize = nTotalSize + file.size
+                        nCount = nCount +1
 			file.Delete(True)
                         
 		End If
