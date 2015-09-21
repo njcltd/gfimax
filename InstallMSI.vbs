@@ -35,8 +35,8 @@ HTTPDownload strURL, strLocalFile
 '------------------------------------------------------------------------------
 commandLine = "MSIexec /I "& strSaveTo & "\" & strExecute & " /quiet"
 WScript.Echo "Installing: " & strExecute
-x = oCmd.Run commandLine, 0, True
-
+x = oCmd.Run(commandLine, 0, True)
+WScript.Echo "Exit Code: " & x
 
 '------------------------------------------------------------------------------
 ' Release objects
