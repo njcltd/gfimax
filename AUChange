@@ -1,0 +1,48 @@
+' Name:       AUChange.vbs
+' Function:   Change the setting for Windows (Automatic) Update
+' Usage:      AUChange ()
+' Returns:    Output according to 1 - 4:
+'     1  "Never check for updates"
+'      2  "Check for updates but let me choose whether to download and install them"
+'      3  "Download updates but let me choose whether to install them"
+'      4  "Install updates automatically" 
+' Modified by Todd Haugland, corrected by Matt Brunmeier
+' http://www.gfimax.com
+ 
+' Old  way from  www.stackoverflow.com post Const AU_DISABLED = 1
+ 
+Dim AUSetting
+args = Wscript.Arguments.Count
+AUSetting = WScript.Arguments.Item(0)
+ 
+if IsNumeric(AUSetting) Then
+    'A number was passed in
+    if AUSetting > 4 then
+        wscript.echo(AUSetting & " is an incorrect value.  You must indicate a value 1 - 4. See script for value explanations")
+        wscript.Quit(10001)
+    end if
+else 
+    wscript.echo(AUSetting & " is an incorrect argument(s). You must indicate one argument with a value 1 - 4. See script for values")
+    wscript.Quit(10001)
+end If
+ 
+Set objAutoUpdate = CreateObject("Microsoft.Update.AutoUpdate")
+Set objSettings = objAutoUpdate.Settings
+ 
+objSettings.NotificationLevel = AUSetting
+objSettings.Save
+ 
+If AUSetting = "1" then
+    wscript.echo("Windows Update has been disabled")
+    wscript.Quit(0)
+elseIf AUSetting = "2" then
+    wscript.echo("Check for updates but let me choose whether to download and install them")
+    wscript.Quit(0)
+elseIf AUSetting = "3" then
+    wscript.echo("Download updates but let me choose whether to install them")
+    wscript.Quit(0)
+else 
+    wscript.echo("Install updates automatically")
+    wscript.Quit(0)
+end If
+ 
