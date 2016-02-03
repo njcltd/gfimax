@@ -1,0 +1,41 @@
+$background-color:  #16a085;
+$background-color-name: #067660;
+$background-color-count: #4d4b4b;
+
+.widget-freshdesk {
+    background: url('/assets/freshdesk-background.png') no-repeat; 
+    background-color: $background-color;
+    background-position: center;
+    color: #ddd;
+
+    ol {
+        list-style-type: none;
+        font-size: 1em;
+        font-weight: bold;
+    }
+
+    .title {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    table {
+        border-collapse: separate;
+        border-spacing: 3px;
+        border-color: white;
+    }
+
+    .name {
+        background-color: $background-color-name;
+        font-size: 1em;
+        font-weight: bold;
+
+    }
+
+    .count {
+        background-color: $background-color-count;
+        font-size: 1em;
+        font-weight: 900;
+    }
+}

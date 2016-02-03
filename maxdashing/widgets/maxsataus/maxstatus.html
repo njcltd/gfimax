@@ -1,0 +1,24 @@
+<h1 class="title">Unassigned Tickets</h1>
+
+<ol>
+  <li data-foreach-item="items" data-showif="item.unclaimed">
+    <span class="subject" data-bind="item.subject | truncate 32"></span> : 
+    <span class="time" data-bind="item.created_at | prettyTime | raw"></span>
+  </li>
+</ol>
+</br>
+<h1 class="title">Agents</h1>
+<table>
+    <tr> 
+        <th class="name" data-foreach-agent="agents">
+            <span data-bind="agent.name | firstName"></span>
+        </th>
+    </tr>
+    <tr>
+        <td class="count" data-foreach-agent="agents">
+            <span data-bind="agent.count"></span>
+            <span data-bind-id="agent.name"></span>
+        </td>
+    </tr>
+</table>
+<p class="updated-at" data-bind="updatedAtMessage"></p>

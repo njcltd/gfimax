@@ -1,0 +1,77 @@
+// ----------------------------------------------------------------------------
+// Mixins
+// ----------------------------------------------------------------------------
+@mixin transition($transition-property, $transition-time, $method) {
+  -webkit-transition: $transition-property $transition-time $method;
+  -moz-transition: $transition-property $transition-time $method;
+  -o-transition: $transition-property $transition-time $method;
+  transition: $transition-property $transition-time $method;
+}
+
+// ----------------------------------------------------------------------------
+// Sass declarations
+// ----------------------------------------------------------------------------
+$background-color:  #00C176;
+$background-color-ok: #00C176;
+$value-color: #FFFFFF;
+$title-color: white;
+$updated-at-color: rgba(0, 0, 0, 0.3);
+
+
+// ----------------------------------------------------------------------------
+// Widget-text styles
+// ----------------------------------------------------------------------------
+.widget-maxinfo {
+
+  background-color: $background-color;
+  @include transition(background-color, 1s, linear);
+
+  .row {
+    clear: both;
+    padding: 0px 0px 0px 0px;
+    position: relative;
+  }
+
+  .col {
+    float: left;
+    width: 50%;
+  }
+
+  .title {
+    color: $title-color;
+    font-weight: bold;
+    text-transform: uppercase; 
+  }
+
+  .updated-at {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .count {
+    font-size: 146px;
+    font-weight: bold;
+    padding: 0px;
+    margin: 0px;
+    line-height: 100%;
+  }
+
+ .h1 {
+    padding: 0px;
+    line-height: 90%;
+  }
+
+ .info {
+    font-size: 100px;
+    line-height: 100%;
+  }
+
+ .infoname {
+    font-size: 30px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  
+
+}
+
+
