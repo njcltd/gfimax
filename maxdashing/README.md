@@ -2,7 +2,7 @@
 
 After uploading the widgets and the job you need to update your dashboad script
 
-
+![max_dashboard](https://cloud.githubusercontent.com/assets/8008695/12797377/8a6eba5c-cabb-11e5-95e3-29fd47a8fa7c.jpg)
 
 ```
 <li data-row="2" data-col="2" data-sizex="1" data-sizey="1" >
