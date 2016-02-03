@@ -27,7 +27,7 @@ After uploading the widgets and the job you need to update your dashboad script
 
 <li data-row="2" data-col="5" data-sizex="1" data-sizey="1" >
       <div data-id="max_clients_sites" data-view="Maxinfo" data-title="monitoring">
-    </li
+    </li>
 ```
 
 
