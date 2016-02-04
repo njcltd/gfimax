@@ -1,4 +1,4 @@
-class Dashing.Ctickets extends Dashing.Widget
+class Dashing.Maxmulti extends Dashing.Widget
 
 
   ready: ->
