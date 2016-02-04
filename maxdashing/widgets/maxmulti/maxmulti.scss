@@ -21,7 +21,7 @@ $updated-at-color: rgba(0, 0, 0, 0.3);
 // ----------------------------------------------------------------------------
 // Widget-text styles
 // ----------------------------------------------------------------------------
-.widget-ctickets {
+.widget-maxmulti {
 
   background-color: $background-color;
   @include transition(background-color, 1s, linear);
@@ -60,12 +60,12 @@ $updated-at-color: rgba(0, 0, 0, 0.3);
     line-height: 90%;
   }
 
- .agents {
+ .infonum {
     font-size: 38px;
     line-height: 100%;
   }
 
- .agentname {
+ .infoname {
     text-transform: uppercase;
     font-weight: bold;
   }
