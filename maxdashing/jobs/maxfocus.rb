@@ -64,14 +64,7 @@ offlinenum = 0
         servissues = doc.xpath('//server').count
         wsissues = doc.xpath('//workstation').count
 
-serverav = 2
-# servissues = 1
-# wsissues = 8
-wsav = 4
-
-statuswarn = "warning"
-statusdanger = "danger"
-statusok = "ok"
+# Set Status Warning
 
 offlinestatus = case offlinenum
   when 0 then 'ok'
@@ -115,6 +108,5 @@ end
 
       send_event('max_ws_issues', { num: wsissues, status: wsistatus})
 
-      send_event('max_ws_av', { num: wsav, status: statuswarn})
 
 end
