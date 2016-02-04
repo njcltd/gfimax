@@ -1,8 +1,16 @@
 #MAXfocus Dashing Dashboard
 
-After uploading the widgets and the job you need to update your dashboad script
+##The End Result
 
 ![max_dashboard](https://cloud.githubusercontent.com/assets/8008695/12797377/8a6eba5c-cabb-11e5-95e3-29fd47a8fa7c.jpg)
+
+##Getting There!
+
+Upload the Job and widgets, to the coresponding folders, the widget names are important to remain as they are!
+
+Change the API key to yours from the dashboard in the maxfocus.rb file (Dashboard, Settings, General Settings, API)
+
+Once they are uploaded configure your dashboard.erb file by adding the lines below, you can change the layout if you wish.
 
 ```
 <li data-row="2" data-col="2" data-sizex="1" data-sizey="1" >
@@ -25,7 +33,7 @@ After uploading the widgets and the job you need to update your dashboad script
       <div data-id="max_ws_issues" data-view="Statusnum" data-title="Workstation Issues"></div>
     </li>
 
-<li data-row="2" data-col="5" data-sizex="1" data-sizey="1" >
+<li data-row="3" data-col="4" data-sizex="1" data-sizey="1" >
       <div data-id="max_clients_sites" data-view="Maxinfo" data-title="monitoring">
     </li>
 ```
