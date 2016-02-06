@@ -10,7 +10,7 @@ Upload the Job and widgets, to the coresponding folders, the widget names are im
 
 Change the API key to yours from the dashboard in the maxfocus.rb file (Dashboard, Settings, General Settings, API)
 
-Once they are uploaded configure your dashboard.erb file by adding the lines below, you can change the layout if you wish.
+Once they are uploaded configure your dashboard file, sample.erb located in the dashboard folder by adding the lines below, you can change the layout if you wish.
 
 ```
 <li data-row="2" data-col="2" data-sizex="1" data-sizey="1" >
