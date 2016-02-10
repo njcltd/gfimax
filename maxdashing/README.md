@@ -6,7 +6,9 @@
 
 ##Getting There!
 
-Upload the Job and widgets, to the coresponding folders, the widget names are important to remain as they are!
+First ensure you have an install of dashing.io installed, working and ready.
+
+Then Upload the Job and widgets, to the coresponding folders, the widget names are important to remain as they are!
 
 Change the API key to yours from the dashboard in the maxfocus.rb file (Dashboard, Settings, General Settings, API)
 
@@ -38,5 +40,26 @@ Once they are uploaded configure your dashboard file, sample.erb located in the 
     </li>
 ```
 
+## Wrapping it up
 
+You will need to ensure you have Nokogiri in your Gemfile which is located in the Dashing root Directory
+
+```
+gem 'nokogiri'
+```
+
+Once added you will need to run the following from your root dashing directory
+
+```
+sudo bundle install
+```
+
+NOTE: if you get an error after doing this your ruby install you may need to install the following
+
+```
+sudo apt-get install ruby-dev zlib1g-dev liblzma-dev
+sudo gem install nokogiri
+```
+
+and then run the 'bundle install' again
 
