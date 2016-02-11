@@ -8,6 +8,7 @@ site_list = []
 SCHEDULER.every '1h',  :first_in => 0  do
 # Build a list of sites every hour as list server APi requires SITEID
 
+site_list = []
 sitescount = 0
 
 # Get List of clients
