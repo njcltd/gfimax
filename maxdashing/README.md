@@ -6,7 +6,7 @@
 
 ##Getting There!
 
-First ensure you have an install of dashing.io installed, working and ready.
+First ensure you have an install of dashing.io installed (for more on that check out http://dashing.io), working and ready.
 
 Then Upload the Job and widgets, to the coresponding folders, the widget names are important to remain as they are!
 
@@ -62,4 +62,3 @@ sudo gem install nokogiri
 ```
 
 and then run the 'bundle install' again
-
