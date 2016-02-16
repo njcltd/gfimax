@@ -64,6 +64,8 @@ offlinenum = 0
         mavnum = mavnum +  doc.xpath('//check_type[text()="1034"]').count
         servissues = doc.xpath('//server').count
         wsissues = doc.xpath('//workstation').count
+        wsmaint = doc.xpath('//offline/description[text()="OFFLINE - MAINTENANCE MODE"]').count
+        wsissues = wsissues - wsmaint
 
 # Set Status Warning
 
