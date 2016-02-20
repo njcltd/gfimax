@@ -1,6 +1,13 @@
 '------------------------------------------------------------------------------
-' Script for downloading and silently installing MSI
+' InstallMSI.vbs
 '------------------------------------------------------------------------------
+' Script for downloading MSI Install and then silently installing with feedback
+'------------------------------------------------------------------------------
+'------------------------------------------------------------------------------
+' Author: Paul Benn, Not Just Computers
+'------------------------------------------------------------------------------
+
+
 
 strSaveTo = "C:\NJCInst\Download"
 strURL = "http://www.domain.com/downloads/File.msi"
