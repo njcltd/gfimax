@@ -1,6 +1,12 @@
 '------------------------------------------------------------------------------
-' Script for downloading and running the downloaded file
+' FileDownload.vbs
 '------------------------------------------------------------------------------
+' Script for downloading and then running the downloaded file
+'------------------------------------------------------------------------------
+'------------------------------------------------------------------------------
+' Author: Paul Benn, Not Just Computers
+'------------------------------------------------------------------------------
+
 
 strSaveTo = "C:\NJCInst\Download"
 strURL = "http://www.domain.com/downloads/File.exe"
