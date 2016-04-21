@@ -2,13 +2,13 @@ require 'nokogiri'
 require 'open-uri'
 
 DASHBOARD_HOST = 'www.systemmonitor.co.uk'
-API_KEY = 'ENTER YOUR API KEY HERE'
+API_KEY = '4573186cfb680207ef350b1bcc8b4e7d'
 
 site_list = []
-SCHEDULER.every '1h',  :first_in => 0  do
+SCHEDULER.every '4h',  :first_in => 0  do
 # Build a list of sites every hour as list server APi requires SITEID
 
-site_list = []
+site_list =[]
 sitescount = 0
 
 # Get List of clients
@@ -23,6 +23,7 @@ sitescount = 0
            sitescount = sitescount + doc1.xpath('//site').count
 	   doc1.xpath('//site').each do |sites|
            site_list << sites.xpath('siteid').text
+           doc1 = ""
           end
         end
 
@@ -39,6 +40,12 @@ SCHEDULER.every '60s' do
 
 #reset offline counter
 offlinenum = 0
+wsmaint = 0
+wsissues = 0
+mobnum = 0
+mavnum = 0
+srvmaint = 0
+servissues = 0
 
     #Loop sites from site array
    site_list.each do |site_list|
@@ -56,18 +63,42 @@ offlinenum = 0
     end
 
 
-      failing_list_api = "https://#{DASHBOARD_HOST}/api/?apikey=#{API_KEY}&service=list_failing_checks" 
+    failing_list_api = "https://#{DASHBOARD_HOST}/api/?apikey=#{API_KEY}&service=list_failing_checks" 
 	#remotely call and parse response from max API
 	doc = Nokogiri::XML(open(failing_list_api))
-	mobnum = doc.xpath('//check_type[text()="1002"]').count
-        mavnum  = doc.xpath('//check_type[text()="1026"]').count
-        mavnum = mavnum +  doc.xpath('//check_type[text()="1034"]').count
-        servissues = doc.xpath('//server').count
-        wsissues = doc.xpath('//workstation').count
-        wsmaint = doc.xpath('//offline/description[text()="OFFLINE - MAINTENANCE MODE"]').count
-        wsissues = wsissues - wsmaint
-
-# Set Status Warning
+	
+	#Loop Woorstations
+	offl = 0
+	doc.xpath('//workstation').each do |workstations|
+	offl = workstations.xpath('offline').count
+	if  offl > 0 then
+	  wsmaint = wsmaint + 1
+	  offl = 0
+	else
+	  wsissues = wsissues + 1
+	  if workstations.xpath('failed_checks/check/check_type').text == '1002' then mobnum = mobnum + 1 end
+      if workstations.xpath('failed_checks/check/check_type').text == '1026' then mavnum = mavnum + 1 end
+      if workstations.xpath('failed_checks/check/check_type').text == '1034' then mavnum = mavnum + 1 end
+    end
+	end
+	
+	if wsissues >= 1 then wsissues = wsissues - 1 end
+	
+    #Loop Servers
+	offl = 0
+	doc.xpath('//server').each do |servers|
+	offl = servers.xpath('offline').count
+	if  offl > 0 then
+	  srvmaint = srvmaint + 1
+	  offl = 0
+	else
+	  servissues = servissues + 1
+	  if servers.xpath('failed_checks/check/check_type').text == '1002' then mobnum = mobnum + 1 end
+      if servers.xpath('failed_checks/check/check_type').text == '1026' then mavnum = mavnum + 1 end
+      if servers.xpath('failed_checks/check/check_type').text == '1034' then mavnum = mavnum + 1 end
+	end
+	end
+		
 
 offlinestatus = case offlinenum
   when 0 then 'ok'
@@ -109,7 +140,7 @@ end
 
       send_event('max_servers_issues', { num: servissues, status: servistatus})
 
-      send_event('max_ws_issues', { num: wsissues, status: wsistatus})
+      send_event('max_ws_issues', { num: wsissues, status: wsistatus, maint: wsmaint})
 
 
 end
