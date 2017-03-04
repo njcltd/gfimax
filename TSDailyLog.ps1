@@ -9,11 +9,16 @@
 #------------------------------------------------------------------------------
 
 # Variables 
+# Storage Path
+$filepath = "C:\reports\rdp\"
+$reportdate = (Get-Date).ToString('dd-MM-yyyy')
 # Path for HTML file output
-$htmlfile = ".\LogonActivity.html"
+$htmlfile = $filepath + "LogonActivity-" + $reportdate + ".html"
+# Path for CSV file output
+$csvfile = $filepath + "RDPUserLogs-" + $reportdate + ".csv" 
 
 # Table Creation
-$LogonActivityTable = New-Object system.Data.DataTable “Logon/Logoff Activity”
+$LogonActivityTable = New-Object system.Data.DataTable "Logon/Logoff Activity"
 
 # Create Columns
 $date = New-Object system.Data.DataColumn "Date",([string])
@@ -30,18 +35,20 @@ $LogonActivityTable.columns.add($user)
 $LogonActivityTable.columns.add($ipaddress)
 
 # Reads the hostname, sets to the local hostname if left blank 
-# $hostname = "192.168.5.7" 
+$hostname = "192.168.16.30" 
 if ($hostname.length -eq 0){$hostname = $env:computername} 
  
 # Reads the start date, sets to 1/1/2000 if left blank 
-$startTmp = (get-date).AddDays(-1).ToString("MM/dd/yyyy") 
+$startTmp = (get-date).AddDays(-1).ToString("dd/MM/yyyy") 
 if ($startTmp.length -eq 0){$startTmp = "1/1/2000"} 
-$startDate = get-date $startTmp 
- 
+$startDate = (get-date).$startTmp 
+$startDate = $startTmp 
+
 # Reads the end date, sets to the current date and time if left blank 
-$endTmp = Get-Date -UFormat %m/%d/%Y
+$endTmp = Get-Date -UFormat %d/%m/%Y
 if ($endTmp.length -eq 0){$endTmp = get-date} 
-$endDate = get-date $endTmp 
+$endDate = (get-date).$endTmp 
+$endDate = $endTmp 
  
 # Reads a Yes or No response to print only the failed login attempts, defaults to No 
 $scope = "N" 
@@ -147,13 +154,13 @@ else{
 
 # Outputs
 # Table
-if ($output -match "T"){ 
-    $FileName="RDPUserLogs-$((Get-Date).ToString('dd-MM-yyyy')).csv" 
-    $LogonActivityTable | export-csv \\host\share\LogonReport\$FileName
-}
+#if ($output -match "T"){ 
+    
+    $LogonActivityTable | export-csv $csvfile
+#}
 
 # HTML
-elseif ($output -match "H"){ 
+#elseif ($output -match "H"){ 
     # HTML Styles
     $style = "<style>"
     $style = $style + "BODY{background-color:#F2F2F2;}"
@@ -163,12 +170,12 @@ elseif ($output -match "H"){
     $style = $style + "</style>"
 
     $LogonActivityTable | Select-Object Date, Type, Status, User, IPAddress | ConvertTo-Html -head $style -body "<h2>Logon Activity:</h2>" | Out-File $htmlfile
-    Invoke-Expression $htmlfile
-}
+    #Invoke-Expression $htmlfile
+#}
 
 
 
 # Default output, returns the table object in list form by default
-else{
-    $LogonActivityTable
-}
+#else{
+#    $LogonActivityTable
+#}
