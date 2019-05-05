@@ -1,10 +1,10 @@
-#MAXfocus Dashing Dashboard
+# MAXfocus Dashing Dashboard
 
-##The End Result
+## The End Result
 
 ![max_dashboard](https://cloud.githubusercontent.com/assets/8008695/12797377/8a6eba5c-cabb-11e5-95e3-29fd47a8fa7c.jpg)
 
-##Getting There!
+## Getting There!
 
 First ensure you have an install of dashing.io installed (for more on that check out http://dashing.io), working and ready.
 
